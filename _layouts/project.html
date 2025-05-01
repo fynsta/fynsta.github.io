@@ -1,0 +1,83 @@
+---
+layout: default
+---
+
+<div class="project-header">
+  <div class="container">
+    <h1 class="project-title">{{ page.title }}</h1>
+    <div class="project-meta">
+      {% if page.date %}
+      <span class="project-date">
+        <i class="far fa-calendar"></i> {{ page.date | date: "%B %Y" }}
+      </span>
+      {% endif %}
+      
+      {% if page.categories.size > 0 %}
+      <span class="project-categories">
+        <i class="fas fa-folder"></i>
+        {% for category in page.categories %}
+          <a href="{{ site.baseurl }}/categories/{{ category | slugify }}/">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </span>
+      {% endif %}
+    </div>
+    
+    <div class="project-links">
+      {% if page.github %}
+      <a href="{{ page.github }}" target="_blank" class="button">
+        <i class="fab fa-github"></i> GitHub Repository
+      </a>
+      {% endif %}
+      
+      {% if page.demo %}
+      <a href="{{ page.demo }}" target="_blank" class="button">
+        <i class="fas fa-external-link-alt"></i> Live Demo
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="project-content">
+  <div class="container">
+    <article>
+      {% if page.featured_image %}
+      <div class="project-featured-image">
+        <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title }}">
+      </div>
+      {% endif %}
+      
+      {{ content }}
+      
+      {% if page.technologies.size > 0 %}
+      <div class="project-technologies">
+        <h3>Technologies Used</h3>
+        <ul>
+          {% for tech in page.technologies %}
+            <li>{{ tech }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </article>
+    
+    <div class="more-projects">
+      <h3>More Projects</h3>
+      <div class="projects-grid">
+        {% assign other_projects = site.projects | where_exp: "project", "project.url != page.url" | sample: 3 %}
+        {% for project in other_projects %}
+          <div class="project-card">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.excerpt | strip_html | truncate: 100 }}</p>
+            <div class="project-links">
+              <a href="{{ project.url | relative_url }}">View Project</a>
+              {% if project.github %}
+              <a href="{{ project.github }}" target="_blank">GitHub</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

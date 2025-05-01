@@ -1,0 +1,52 @@
+title: Fynn Starke - Personal Website
+email: fynn@fynnstarke.com.com
+description: >- 
+  A personal website showcasing my work, projects, and professional background.
+baseurl: ""
+url: "https://fynnstarke.com"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Author information
+author:
+  name: Fynn Starke
+  title: Quantitative Finance Student at ETH/UZH
+  email: fynn@fynnstarke.com
+  github: fynsta
+  linkedin: fynn-starke
+  
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+  
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
